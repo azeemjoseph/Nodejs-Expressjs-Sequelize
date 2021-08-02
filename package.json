@@ -1,0 +1,39 @@
+{
+  "name": "tempelte-for-reuse",
+  "version": "1.0.0",
+  "description": "This is Templete to reuse Nodejs-express-sequelize Back End",
+  "main": "server.js",
+  "scripts": {
+    "test": "jasmine",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azeemjoseph/Nodejs-Expressjs-Sequelize.git"
+  },
+  "keywords": [
+    "node.js",
+    "templete",
+    "express.js",
+    "templete",
+    "node",
+    "js",
+    "sequelize"
+  ],
+  "author": "Azeem Joseph",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azeemjoseph/Nodejs-Expressjs-Sequelize/issues"
+  },
+  "homepage": "https://github.com/azeemjoseph/Nodejs-Expressjs-Sequelize#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "jasmine": "^3.8.0",
+    "node-fetch": "^2.6.1"
+  }
+}
