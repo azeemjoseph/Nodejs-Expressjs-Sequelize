@@ -40,8 +40,7 @@ jobs:
       # build and test the apps
       - name: build
         run: |
-          npm run build:prod
-          npm run jasmine
+          npm run build
 
   push_to_Docker_Hub:
     # The type of runner that the job will run on
