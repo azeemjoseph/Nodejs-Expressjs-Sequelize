@@ -1,23 +1,24 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../util/database');
-
-const User = sequelize.define('user', {                         //Model that is used to create Table in MYsql
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
-    userName: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    userEmail:{
-         type: Sequelize.STRING,
-         allowNull: false
-    }     
-});
-
-//Note: createdAt and updatedAt columns will added to table automatically thanks to Sequelize package
-
-module.exports = User;
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  };
+  User.init({
+    email: DataTypes.STRING,
+    password: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};

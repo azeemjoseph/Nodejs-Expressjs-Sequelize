@@ -13,3 +13,4 @@ npm-debug.log
 README-secret.md
 # github related files
 .github/
+.env

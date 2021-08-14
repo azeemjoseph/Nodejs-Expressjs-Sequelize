@@ -1,10 +1,10 @@
-const user = require("../models/user");
+const models = require("../models/index");
 
 // https://sequelize.org/v5/manual/models-usage.html                    // for more functions
 exports.getAllUsers = (req, res, next) => {
   //req = for request object res = for response object next is used to call next middeleware
-  user
-    .findAll()
+  // console.log('getAllUsers called :');
+  models.User.findAll()
     .then((user) => {
       console.log("user : ", user);
       res.send(user);
@@ -15,17 +15,33 @@ exports.getAllUsers = (req, res, next) => {
 };
 
 //POSTMAN is used to test the End Points localhost:3001/GetuserByName (set raw then select datatype JSON)
-exports.getSpecificUserByName = (req, res, next) => {
-  console.log("User name in req body : ", req.body.username);
-  UserName = req.body.username;
-  user
-    .findOne({
-      where: { userName: UserName },
-      attributes: ["id", ["userName", "userNameAlias"]],                                                     // This attribute is used to set Alias like :column as column1
+exports.getSpecificUserByEmail = (req, res, next) => {
+  console.log("User name in req body : ", req.body.email);
+  email = req.body.email;
+  models.User.findOne({
+    where: { email: email },
+    attributes: ["id", ["email", "emailAlias"]], // This attribute is used to set Alias like :column as column1
+  }).then((user) => {
+    // user.get('userName') will contain the name of the user as column name of table
+    console.log("user.get(id) :", user.get("emailAlias"));
+    res.send(user);
+  });
+};
+
+exports.createUserInDB = (req, res, next) => {
+  //req = for request object res = for response object next is used to call next middeleware
+  models.User.create({
+    email: req.body.email,
+    password: req.body.password,
+  })
+    .then((result) => {
+      res.status(201).json({
+        message: "User account Created Successfuly",
+        email: req.body.email,
+      });
     })
-    .then((user) => {
-      // user.get('userName') will contain the name of the user as column name of table
-      console.log("user.get(id) :", user.get("userNameAlias"));
-      res.send(user);
+    .catch((err) => {
+      console.log(err);
+      res.status(406).json({ message: "Email or password must be valid" });
     });
 };
