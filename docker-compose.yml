@@ -12,7 +12,7 @@ services:
     environment: 
       MYSQL_HOST: mysql
       MYSQL_USER: root
-      MYSQL_PASSWORD: Lmis@123
+      MYSQL_PASSWORD: sequelize_test
       MYSQL_DB: sequelize_test   
 
   mysql:
@@ -20,7 +20,7 @@ services:
     volumes: 
       - azeem-sequelize:/var/lib/mysql
     environment: 
-      MYSQL_ROOT_PASSWORD: Lmis@123
+      MYSQL_ROOT_PASSWORD: sequelize_test
       MYSQL_DATABASES: sequelize_test
 
 volumes: 
