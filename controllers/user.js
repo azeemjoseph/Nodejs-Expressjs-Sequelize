@@ -16,15 +16,28 @@ exports.getAllUsers = (req, res, next) => {
 
 //POSTMAN is used to test the End Points localhost:3001/GetuserByName (set raw then select datatype JSON)
 exports.getSpecificUserByEmail = (req, res, next) => {
-  console.log("User name in req body : ", req.body.email);
-  email = req.body.email;
+  console.log("User email password in req body : ", req.body);
+  const email = req.body.email;
+  const password = req.body.password;
   models.User.findOne({
-    where: { email: email },
-    attributes: ["id", ["email", "emailAlias"]], // This attribute is used to set Alias like :column as column1
+    where: { email: email, password: password },
+    attributes: ["id", ["email", "emailAlias"],"password"], // This attribute is used to set Alias like :column as column1
   }).then((user) => {
     // user.get('userName') will contain the name of the user as column name of table
-    console.log("user.get(id) :", user.get("emailAlias"));
-    res.send(user);
+    if(user) {
+    console.log("user.get(id) :", user.get("emailAlias"));    
+    }        
+    return user;
+  }).then( result => {
+    if(result) {
+     let token = "acd123";
+     res.status(200).json(token);
+    } else {
+      res.status(404).json({message: "Invalid user Name Password"});
+      return;
+    }
+  }).catch(err => {
+    console.log(err);
   });
 };
 
